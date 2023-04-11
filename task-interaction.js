@@ -45,19 +45,19 @@ function taskHandler() {
     taskElement.appendChild(doneButtonElement);
     doneButtonElement.classList.add("done");
 
-    //ChatGPT Below
+    // Retrieve the line-through style from localStorage for the current task
+    const toDoListStyle = localStorage.getItem(task);
+    if (toDoListStyle && !taskElement.style.textDecoration) {
+      taskElement.style.textDecoration = toDoListStyle;
+    }
+
     doneButtonElement.addEventListener("click", function () {
       taskElement.style.textDecoration = "line-through";
 
-      // Save the line-through style to localStorage
-      localStorage.setItem("toDoListStyle", "line-through");
+      // Save the line-through style to localStorage for the current task
+      localStorage.setItem(task, "line-through");
     });
-
-    // Retrieve the line-through style from localStorage on page load
-    const toDoListStyle = localStorage.getItem("toDoListStyle");
-    if (toDoListStyle) {
-      taskElement.style.textDecoration = toDoListStyle;
-    }
   }
 }
+
 taskHandler();
